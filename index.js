@@ -18,7 +18,7 @@ sessionMiddleware.app;
 
 
 /////////////////express-messages//////////////////////////////
-flashMessagesMiddleware.customMessagesSetup;
+flashMessagesMiddleware.customMessagesSetup();
 
 //routing
 routes.app;

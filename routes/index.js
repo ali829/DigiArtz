@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+var flash = require('connect-flash');
 //init application
 const app = express();
 
@@ -24,4 +25,8 @@ app.set('view engine' , 'ejs');
 
 //use static folder
 app.use(express.static(path.join(__dirname , 'public')));
+
+//use flash middleware
+app.use(flash());
+
 module.exports = app;
