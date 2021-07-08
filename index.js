@@ -15,6 +15,14 @@ const app = express();
 //connection database 
 database.db;
 
+//////////////////////middleware//////////////////
+//body-parser
+bodyParser.parseBody(app);
+//session 
+session.useSession(app);
+//messages
+flashMessages.customMessagesSetup(app);
+
 /////////////////////////routing///////////////////////
 //setup router
 routes.setupRouter(app);
@@ -28,10 +36,3 @@ routes.setTemplateEngine(app);
 //setup static folder
 routes.useStatic(app,express)
 
-//////////////////////middleware//////////////////
-//body-parser
-bodyParser.parseBody(app);
-//session 
-session.useSession(app);
-//messages
-flashMessages.customMessagesSetup(app);

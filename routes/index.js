@@ -1,7 +1,7 @@
 const path = require('path');
 
 const pagesRouting = require('./routing-modules/pages');
-const adminRouting = require('./routing-modules/admin');
+const adminCategories = require('./routing-modules/admin_categories');
 
 
 let listenPort = (app) => {
@@ -14,7 +14,7 @@ let listenPort = (app) => {
 }
 
 let setupRouter = (app) => {
-    app.use('/admin', adminRouting);
+    app.use('/admin/categories/', adminCategories);
     app.use('/', pagesRouting);
 }
 
