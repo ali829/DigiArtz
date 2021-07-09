@@ -1,24 +1,24 @@
 const express = require('express');
-const Category = require('../../models/category');
+const categoryController = require('../../controllers/category.controller');
 
 const router = express.Router();
 
 
-//first page
-router.get('/' , (req , res) => {
-    res.send('here will show all categories');
-})
+//get list of categories
+router.get('/', categoryController.findAll);
 
-//POST add-category
-router.post('/add' , (req , res) => {
-    let name = req.body.name;
-    let slug = req.body.slug;
-    const category = new Category({name:name , slug:slug});
-    console.log(category);
-})
-//GET add-category
-router.get('/add' , (req , res) => {
-    res.send('here to add new category')
-})
+
+//add category
+router.post('/add', categoryController.create);
+
+
+//edit category
+router.put(`/edit/:catId` , categoryController.update);
+
+
+//delete category 
+router.delete('/delete/:catId' , categoryController.delete);
+
+
 
 module.exports = router;
