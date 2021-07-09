@@ -7,17 +7,17 @@ const router = express.Router();
 //get list of categories
 router.get('/', categoryController.findAll);
 
+//get single category
+router.get('/:idCat' , categoryController.findOne)
 
 //add category
 router.post('/add', categoryController.create);
 
-
 //edit category
-router.put(`/edit/:catId` , categoryController.update);
-
+router.put(`/edit/:idCat` , categoryController.update);
 
 //delete category 
-router.delete('/delete/:catId' , categoryController.delete);
+router.delete('/delete/:idCat' , categoryController.delete);
 
 
 

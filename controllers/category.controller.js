@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Category = require('../models/category');
+mongoose.set('useFindAndModify', false);
 
 //get all the categories
 exports.findAll = (req , res) => {
@@ -7,6 +8,20 @@ exports.findAll = (req , res) => {
         if (err) console.log(err);
         res.setHeader('Content-type', 'application/json')
         res.json(data);
+    })
+}
+//get one category
+
+exports.findOne = (req , res) => {
+    Category.findById(req.params.idCat)
+    .then(category => {
+        if (!category) {
+            res.status(404).send({message:'category not found'})
+        }
+        res.send(category)
+    })
+    .catch(err => {
+        return res.status(500).send(err)
     })
 }
 
@@ -33,15 +48,13 @@ exports.create = (req, res) => {
 }
 
 //update a category 
-exports.update = (req , res) => {
-    let id = mongoose.Types.ObjectId(req.params.id)
-    Category.findByIdAndUpdate( id, {name: req.body.name , slug: req.body.slug} ,{new: true})
-    .then((category) => {
-        res.setHeader('Content-type', 'application/json')
-        if(!category){
+exports.update =  (req , res) => {
+    Category.findByIdAndUpdate(req.params.idCat , {name:req.body.name , slug:req.body.slug})
+    .then(category => {
+        if (!category) {
             return res.status(404).send({message: 'category not found'})
         }else{
-            res.json(category)
+            res.send(category)
         }
     })
     .catch(err => {
@@ -50,17 +63,17 @@ exports.update = (req , res) => {
 }
 
 
-//selete a category 
+//delete a category 
 exports.delete = (req , res) => {
-    let id = mongoose.Types.ObjectId(req.params.id);
-    Category.findByIdAndDelete(id)
+    Category.findByIdAndDelete(req.params.idCat)
     .then(category => {
-        if(!category){
-            res.send({message:'Category is not exist'})
+        if (!category) {
+            return res.status(404).send({message: 'category not found'})
+        }else{
+            res.send(category)
         }
-        res.json(category);
     })
     .catch(err => {
-        return res.status(500).send(err);
+        return res.status(500).send(err)
     })
 }
