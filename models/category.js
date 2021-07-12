@@ -7,7 +7,17 @@ let categorySchema = mongoose.Schema({
     },
     slug: {
         type:String
+    },
+    products:[{
+        type: mongoose.Types.ObjectId,
+        ref:'Product'
+    }],
+    image:  {
+        type:String,
+        required:true
     }
+},{
+    timestamps: true
 });
 
 let Category = module.exports = mongoose.model('Category', categorySchema);

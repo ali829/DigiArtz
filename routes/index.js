@@ -1,7 +1,7 @@
 const path = require('path');
 
-const pagesRouting = require('./routing-modules/pages');
-const adminCategories = require('./routing-modules/admin_categories');
+const productsApi = require('./api/products-api');
+const categoriesApi = require('./api/categories-api');
 
 
 let listenPort = (app) => {
@@ -14,8 +14,8 @@ let listenPort = (app) => {
 }
 
 let setupRouter = (app) => {
-    app.use('/admin/categories/', adminCategories);
-    app.use('/', pagesRouting);
+    app.use('/api/categories/', categoriesApi);
+    app.use('/api/products/', productsApi);
 }
 
 let setTemplateEngine = (app) => {
